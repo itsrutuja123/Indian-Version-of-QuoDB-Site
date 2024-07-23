@@ -1,7 +1,7 @@
 import Login from "./loginClient";
 
 const page = () => {
-  return <Login />;
+  return null;
 };
 
 export default page;
