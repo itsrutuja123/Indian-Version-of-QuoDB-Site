@@ -1,7 +1,6 @@
-// import Login from './loginClient'
+import Dashboard from "./dashboardClient"
+const page = () => {
+  return <Dashboard />
+}
 
-// const page = () => {
-//   return <Login />
-// }
-
-// export default page
+export default page

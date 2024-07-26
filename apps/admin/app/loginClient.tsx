@@ -1,11 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Button } from "@ui/components/button";
 import { Input } from "@ui/components/input";
 import { Label } from "@ui/components/label";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import {
   Card,
   CardHeader,
@@ -22,16 +24,29 @@ const validationSchema = Yup.object({
 });
 
 export default function Login() {
+
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      // Handle form submission
-      console.log("Form values", values);
-    },
+    onSubmit: async (values) => {
+      setLoading(true)
+      const { email, password } = values;
+
+      const response = await signIn("login", { email, password, redirect: false });
+      console.log(response)
+      if (!response?.ok) {
+        // toast.error(response?.error);
+        setLoading(false)
+      } else {
+        router.push("/dashboard")
+      }
+    }
   });
 
   return (
@@ -89,8 +104,8 @@ export default function Login() {
                 </div>
               ) : null}
             </div>
-            <Button type="submit" className="w-full">
-              Login
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Loading..." : "Sign In"}
             </Button>
           </form>
         </CardContent>
