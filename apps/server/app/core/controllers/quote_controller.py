@@ -22,6 +22,7 @@ class QuoteController:
             "Movie":quote.movie,
             "Year":quote.year,
             "Quote":quote.quote,
+            "Language":quote.language,
             "QuoteVector":quoteVector
         }
         response=await ElasticsearchClient.insert_quote(document)
@@ -32,7 +33,8 @@ class QuoteController:
             "Movie": quote.movie,
             "Year": quote.year,
             "Quote": quote.quote,
-            "QuoteVector": model_service.encode(quote.quote)
+            "QuoteVector": model_service.encode(quote.quote),
+            "Language": quote.language
         } for quote in quotes]
 
         response = await ElasticsearchClient.insert_quotes_bulk(documents)

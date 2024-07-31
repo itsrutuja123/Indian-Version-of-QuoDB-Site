@@ -10,6 +10,9 @@ quote_index_mapping = {
             "Quote":{
                 "type":"text"
             },
+            "Language":{
+                "type":"text"
+            },
             "QuoteVector":{
                 "type":"dense_vector",
                 "dims":768,

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", "8000")) 
+    port = int(os.getenv("PORT", "9000")) 
     uvicorn.run(
         app="app.core.server:app",  
         reload=True,

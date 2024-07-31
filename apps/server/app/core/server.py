@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from app.api import router
 from app.db.elasticsearch import ElasticsearchClient
+from fastapi import status
 
 
 def init_routers(app_: FastAPI) -> None:
@@ -29,3 +30,8 @@ def create_app() -> FastAPI:
 
 
 app = create_app()
+
+# Health check route
+@app.get("/health", status_code=status.HTTP_200_OK)
+async def health_check():
+    return {"status": "ok"}

@@ -6,3 +6,4 @@ class Quote(BaseModel):
     movie: str
     quote: str
     year: str
+    language: Optional[str] = 'English'
