@@ -8,8 +8,8 @@ import { ScrollArea } from "@ui/components/scroll-area";
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Next Shadcn Dashboard Starter',
-    description: 'Basic dashboard with Next.js and Shadcn'
+    title: 'Indo Movie Quo DB',
+    description: 'Indo Movie QuoDB',
 };
 
 export default async function DashboardLayout({

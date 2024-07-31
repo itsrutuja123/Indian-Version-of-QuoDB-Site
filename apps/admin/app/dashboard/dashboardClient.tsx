@@ -8,15 +8,30 @@ import {
   CardHeader,
   CardTitle
 } from '@ui/components/card';
+import useSWR from "swr";
+import { fetcher } from "../../lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/components/tabs';
 import PageContainer from "../../components/Layout"
+import { Label } from "@ui/components/label";
+import { ContributionsTable } from "../../components/Tables/ContributionTable";
+
 
 export default function Dashboard() {
 
+  const { data, error, isLoading } = useSWR("/api/contributions", fetcher);
+
+  if (isLoading) return <div>Loading...</div>
+
+  if (error) return <div>Failed to load</div>
+
+  if (!isLoading && !error && !data) return <div>No data</div>
+
+  console.log(data)
+
   return (
     <PageContainer scrollable={true}>
-
-      <div>
+      <div className="grid grid-cols-1 gap-5">
+        <Label className="text-4xl font-bold">Dashboard</Label>
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -29,7 +44,7 @@ export default function Dashboard() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Total Revenue
+                    All Quotes
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +69,7 @@ export default function Dashboard() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Subscriptions
+                    Contributions
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +95,7 @@ export default function Dashboard() {
               </Card>
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Sales</CardTitle>
+                  <CardTitle className="text-sm font-medium">Approved Requests</CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -105,7 +120,7 @@ export default function Dashboard() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Active Now
+                    Pending Requests
                   </CardTitle>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -128,9 +143,12 @@ export default function Dashboard() {
                 </CardContent>
               </Card>
             </div>
-
+            <ContributionsTable data={data} />
           </TabsContent>
         </Tabs>
+
+
+
       </div>
     </PageContainer>
   )
