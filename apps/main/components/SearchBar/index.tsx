@@ -3,9 +3,9 @@
 import React from "react";
 import { Input } from "@ui/components/input";
 
-export default function SearchBar({ query, setQuery }: any) {
+export default function SearchBar({ query, setQuery, onSubmit }: any) {
   return (
-    <div className="bg-white items-center justify-between w-full flex rounded-full shadow-lg p-2 mb-5 sticky">
+    <form onSubmit={onSubmit} className="bg-white mx-auto w-4/5 flex rounded-full shadow-lg p-2 mb-5">
       <Input
         className="font-bold rounded-full w-full py-4 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
         type="text"
@@ -27,6 +27,7 @@ export default function SearchBar({ query, setQuery }: any) {
           />
         </svg>
       </div>
-    </div>
+    </form>
+
   );
 }

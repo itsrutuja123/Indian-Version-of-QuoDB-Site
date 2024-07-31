@@ -1,6 +1,10 @@
 import Dashboard from "./dashboardClient"
+
 const page = () => {
-  return <Dashboard />
+  return (
+
+    <Dashboard />
+  )
 }
 
 export default page

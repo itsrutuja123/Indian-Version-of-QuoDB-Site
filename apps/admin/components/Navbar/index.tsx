@@ -1,14 +1,18 @@
-import React from 'react'
+// import ThemeToggle from '@/components/layout/ThemeToggle/theme-toggle';
+// import { cn } from '@/lib/utils';
+// import { MobileSidebar } from './mobile-sidebar';
+// import { UserNav } from './user-nav';
 
-const Navbar = () => {
+export default function Header() {
     return (
-        <nav className="bg-white border-gray-200 dark:bg-gray-900">
-            <div className="flex flex-wrap items-center justify-between p-4">
-                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Indo Movie Quo</span>
-            </div>
-        </nav>
-
-    )
+        <header className="sticky inset-x-0 top-0 w-full">
+            <nav className="flex items-center justify-between px-4 py-2 md:justify-end">
+                Indo Movie Quo DB
+                <div className="flex items-center gap-2">
+                    {/* <UserNav />
+                    <ThemeToggle /> */}
+                </div>
+            </nav>
+        </header>
+    );
 }
-
-export default Navbar

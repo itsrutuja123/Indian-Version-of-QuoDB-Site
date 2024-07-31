@@ -2,6 +2,7 @@ from elasticsearch import AsyncElasticsearch
 from time import sleep
 from .indexes.quote_index import quote_index_mapping
 
+
 class ElasticsearchClient:
     client = None
 
@@ -80,4 +81,4 @@ class ElasticsearchClient:
                 }
             }
         )
-        return response
+        return response['hits']['hits']

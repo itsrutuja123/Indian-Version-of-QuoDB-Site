@@ -1,21 +1,31 @@
 import { getSession } from "../../lib/auth";
 import { redirect } from "next/navigation";
+
 import Navbar from "../../components/Navbar";
-export default async function AppLayout({
-    children,
+import Sidebar from "../../components/Sidebar";
+
+import { ScrollArea } from "@ui/components/scroll-area";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Next Shadcn Dashboard Starter',
+    description: 'Basic dashboard with Next.js and Shadcn'
+};
+
+export default async function DashboardLayout({
+    children
 }: {
     children: React.ReactNode;
 }) {
-
     const session = await getSession();
     if (!session) redirect('/')
-
     return (
-        <div className="mx-20">
-
-            <Navbar />
-            {children}
-
+        <div className="flex">
+            <Sidebar />
+            <main className="w-full flex-1 overflow-hidden">
+                <Navbar />
+                {children}
+            </main>
         </div>
     );
 }

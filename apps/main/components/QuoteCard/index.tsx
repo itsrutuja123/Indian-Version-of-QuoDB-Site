@@ -1,18 +1,19 @@
+"use client";
+
 import React, { useEffect, useState, useCallback } from "react";
 import throttle from "lodash.throttle";
+import useSWR from 'swr'
+import { fetcher } from "../../lib/utils";
 
 export default function QuoteCard({ query }: { query: string }) {
   const [quotes, setQuotes] = useState<any>([]);
+  const [loading, setLoading] = useState(false)
 
   const fetchQuotes = async (searchQuery: string) => {
-    const fetchedQuotes = [
-      {
-        id: 1,
-        movie: "The Dark Knight",
-        quote: "Why So Serious",
-      },
-    ];
-    setQuotes(fetchedQuotes);
+    setLoading(true);
+    const data = await fetcher(`/api/quote/${searchQuery}`);
+    setQuotes(data);
+    setLoading(false);
   };
 
   const throttledFetchQuotes = useCallback(throttle(fetchQuotes, 2000), []);
@@ -26,10 +27,11 @@ export default function QuoteCard({ query }: { query: string }) {
   if (query.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-4 lg:p-4 p-2 rounded-lg m-2">
+    <div className="flex flex-col gap-4 lg:p-4 p-2 rounded-lg m-2 w-3/5">
       <div className="lg:text-2xl md:text-xl text-lg lg:p-3 p-1 font-black text-gray-700">
         Top Results for {query}
       </div>
+      {loading }
       {quotes.map((quote: any) => (
         <div
           key={quote.id}
