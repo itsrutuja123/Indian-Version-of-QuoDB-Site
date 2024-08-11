@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from app.api import router
 from app.db.elasticsearch import ElasticsearchClient
 from fastapi import status
+from fastapi.middleware.cors import CORSMiddleware
 
 
 def init_routers(app_: FastAPI) -> None:
@@ -30,6 +31,15 @@ def create_app() -> FastAPI:
 
 
 app = create_app()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows specific origins (or ['*'] for all origins)
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
+
 
 # Health check route
 @app.get("/health", status_code=status.HTTP_200_OK)

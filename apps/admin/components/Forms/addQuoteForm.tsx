@@ -59,14 +59,15 @@ const AddQuoteForm = () => {
                     <CardDescription>Upload a new quote or multiple quotes by clicking on the add button</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="grid grid-cols-3 items-center h-4 gap-2 text-center">
+                    <div className="grid grid-cols-4 items-center h-4 gap-2 text-center">
                         <Label className="block text-sm font-medium text-gray-700">Movie Name</Label>
                         <Label className="block text-sm font-medium text-gray-700">Quote</Label>
+                        <Label className="block text-sm font-medium text-gray-700">Language</Label>
                         <Label className="block text-sm font-medium text-gray-700">Year</Label>
                     </div>
                     <form onSubmit={handleSubmit}>
                         {formEntries.map((entry, index) => (
-                            <div key={entry.id} className="grid grid-cols-3 items-center h-16 gap-2">
+                            <div key={entry.id} className="grid grid-cols-4 items-center h-16 gap-2">
                                 <div>
                                     <Input
                                         type="text"
@@ -86,6 +87,16 @@ const AddQuoteForm = () => {
                                         required
                                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                         placeholder="Enter quote"
+                                    />
+                                </div>
+                                <div>
+                                    <Input
+                                        name="language"
+                                        value={entry.language}
+                                        onChange={(e) => handleChange(entry.id, e)}
+                                        required
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                        placeholder="Enter Langauge"
                                     />
                                 </div>
                                 <div className="flex flex-row items-center gap-2 justify-center">

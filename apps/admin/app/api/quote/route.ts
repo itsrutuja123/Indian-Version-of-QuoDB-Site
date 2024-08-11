@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
-import prisma from "../../../lib/prisma";
+import prisma from "../../../libs/prisma";
 import { Status, Language } from "@prisma/client";
-import { getSession } from "../../../lib/auth";
+import { getSession } from "../../../libs/auth";
 import axios from "axios";
 
 const QUOTE_API_URL = process.env.QUOTE_API_URL || "http://localhost:8000/v1/quote/add-quotes-bulk";

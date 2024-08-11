@@ -1,16 +1,7 @@
 quote_index_mapping = {
     "mappings": {
         "properties": {
-            "Movie":{
-                "type":"text"
-            },
-            "Year":{
-                "type":"text"
-            },
-            "Quote":{
-                "type":"text"
-            },
-            "Language":{
+            "Quote_ID":{
                 "type":"text"
             },
             "QuoteVector":{

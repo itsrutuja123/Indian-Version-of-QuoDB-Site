@@ -2,6 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 export const dynamic = 'force-dynamic'
 import axios from "axios";
 
+
 export const GET = async (
     request: NextRequest,
     { params }: { params: { slug: string } }

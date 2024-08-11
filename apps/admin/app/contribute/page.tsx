@@ -8,7 +8,6 @@ export default function Home() {
                     <h1>Hey there</h1>
                     <p>Contribute to our project</p>
                 </div>
-
                 <FormHandler />
             </div>
         </main>

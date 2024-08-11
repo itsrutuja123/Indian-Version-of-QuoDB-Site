@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { getFormData } from "../../lib/formData";
+import { getFormData } from "../../libs/formData";
 import { useStateContext } from "../../context/form";
 import { Input } from "@ui/components/input";
 import { Textarea } from "@ui/components/textarea";

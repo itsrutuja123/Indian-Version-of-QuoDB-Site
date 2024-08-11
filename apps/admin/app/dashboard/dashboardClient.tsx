@@ -9,7 +9,7 @@ import {
   CardTitle
 } from '@ui/components/card';
 import useSWR from "swr";
-import { fetcher } from "../../lib/utils";
+import { fetcher } from "../../libs/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/components/tabs';
 import PageContainer from "../../components/Layout"
 import { Label } from "@ui/components/label";

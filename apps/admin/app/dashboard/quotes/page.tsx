@@ -2,9 +2,9 @@
 
 import PageContainer from "../../../components/Layout";
 import { Label } from "@ui/components/label";
-import { Quotes } from "../../../lib/data";
+import { Quotes } from "../../../libs/data";
 import useSWR from "swr";
-import { fetcher } from "../../../lib/utils";
+import { fetcher } from "../../../libs/utils";
 import { QuotesTable } from "../../../components/Tables/QuotesTable";
 import { columns } from "../../../components/Tables/columns";
 

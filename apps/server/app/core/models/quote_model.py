@@ -3,7 +3,5 @@ from typing import Optional
 
 
 class Quote(BaseModel):
-    movie: str
+    quote_id: str
     quote: str
-    year: str
-    language: Optional[str] = 'English'

@@ -39,19 +39,6 @@ async def add_quote(quote: Quote = Body(...)):
         print(e)
     return quote
 
-
-# @quote_router.post("/add-quotes-bulk")
-# async def add_quotes_bulk(quotes: List[Quote] = Body(...)):
-#     try:
-#         quotes_data = [quote.dict() for quote in quotes]  
-#         task = quote_worker.delay(quotes_data)
-#         return {"Task Id": task.id}
-#     except Exception as e:
-#         print(e)
-#         return {"error": str(e)}
-
-
-
 @quote_router.post("/add-quotes-bulk")
 async def add_quotes_bulk(quotes: List[Quote] = Body(...)):
     try:
@@ -60,11 +47,3 @@ async def add_quotes_bulk(quotes: List[Quote] = Body(...)):
     except Exception as e:
         print(e)
         return {"error": str(e)}
-
-@quote_router.get('/task_status', tags=["Quote"])
-async def task_status(task_id: str):
-    task_result = AsyncResult(task_id, app=celery_app)
-    if not task_result.ready():
-        return {"status": "Running"}
-    result = task_result.get()
-    return {"status": "Complete", "data": result}

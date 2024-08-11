@@ -16,6 +16,7 @@ flower = "^2.0.1"
 celery = "^5.4.0"
 sentence-transformers = "^3.0.1"
 pandas = "^2.2.2"
+deep-translator = "^1.11.4"
 
 
 [build-system]

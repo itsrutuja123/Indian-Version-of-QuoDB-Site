@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import FormDisplay from "./FormDisplay";
 import { useStateContext } from "../../context/form";
-import { getNavigation } from "../../lib/formData";
+import { getNavigation } from "../../libs/formData";
 import { Button } from "@ui/components/button";
 
 
@@ -102,13 +102,13 @@ const FormHandler = () => {
                             </Button>
                         )}
                         {/* <span onClick={() => setClickedNextButton(true)} className="z-50"> */}
-                            <Button
-                                disabled={error && clickedNextButton}
-                                onClick={handleIncrease}
-                                className="primary"
-                            >
-                                Next step
-                            </Button>
+                        <Button
+                            disabled={error && clickedNextButton}
+                            onClick={handleIncrease}
+                            className="primary"
+                        >
+                            Next step
+                        </Button>
                         {/* </span> */}
                     </footer>
                 )}

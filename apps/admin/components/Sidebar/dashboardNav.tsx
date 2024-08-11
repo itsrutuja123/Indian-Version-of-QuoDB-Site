@@ -7,7 +7,7 @@ import { Icons } from '../icons';
 import { cn } from '@ui/lib/utils';
 import { NavItem } from '../../types';
 import { Dispatch, SetStateAction } from 'react';
-import { useSidebar } from '../../lib/hooks/useSidebar';
+import { useSidebar } from '../../libs/hooks/useSidebar';
 import {
     Tooltip,
     TooltipContent,

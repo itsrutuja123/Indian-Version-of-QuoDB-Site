@@ -1,6 +1,6 @@
 "use client";
 
-import { getFormCount } from "../lib/formData";
+import { getFormCount } from "../libs/formData";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface UserData {

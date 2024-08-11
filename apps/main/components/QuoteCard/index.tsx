@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import throttle from "lodash.throttle";
 import useSWR from 'swr'
-import { fetcher } from "../../lib/utils";
+import { fetcher } from "../../libs/utils";
 
 export default function QuoteCard({ query }: { query: string }) {
   const [quotes, setQuotes] = useState<any>([]);
@@ -31,7 +31,7 @@ export default function QuoteCard({ query }: { query: string }) {
       <div className="lg:text-2xl md:text-xl text-lg lg:p-3 p-1 font-black text-gray-700">
         Top Results for {query}
       </div>
-      {loading }
+      {loading}
       {quotes.map((quote: any) => (
         <div
           key={quote.id}

@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import QuoteCard from "../components/QuoteCard";
 import axios from "axios";
-
+import { useRouter } from "next/navigation";
 const Search = () => {
   const [query, setquery] = useState("");
+  const router=useRouter()
 
   const onSearch = (e: any) => {
     e.preventDefault();
-    console.log(e.target)
+    router.push("/search?query=" + query);
   };
 
   return (
@@ -20,7 +21,6 @@ const Search = () => {
         <p className="italic">Search for your favourite movie quotes</p>
       </div>
       <SearchBar query={query} setQuery={setquery} onSubmit={onSearch} />
-      <QuoteCard query={query} />
     </>
   );
 };
