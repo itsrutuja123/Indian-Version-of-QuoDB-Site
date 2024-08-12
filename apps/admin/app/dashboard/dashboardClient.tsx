@@ -17,7 +17,6 @@ import { ContributionsTable } from "../../components/Tables/ContributionTable";
 
 
 export default function Dashboard() {
-
   const { data, error, isLoading } = useSWR("/api/contributions", fetcher);
 
   if (isLoading) return <div>Loading...</div>
@@ -143,8 +142,8 @@ export default function Dashboard() {
                 </CardContent>
               </Card>
             </div>
-            <ContributionsTable data={data} />
           </TabsContent>
+          <TabsContent value="analytics" className="space-y-4"><ContributionsTable data={data} /></TabsContent>
         </Tabs>
 
 

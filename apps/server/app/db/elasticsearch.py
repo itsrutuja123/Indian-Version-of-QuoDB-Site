@@ -57,7 +57,7 @@ class ElasticsearchClient:
                     "excludes": ["QuoteVector"]
                 }
             })
-        return res
+        return res['hits']['hits']
 
     
     @classmethod

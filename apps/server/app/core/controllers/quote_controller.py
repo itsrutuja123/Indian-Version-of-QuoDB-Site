@@ -10,10 +10,11 @@ class QuoteController:
 
     def convert(self, quote):
         data = translate_service.translate(quote)
-        return (model_service.encode(data),)
+        print("Translated Quote: ", data)
+        return model_service.encode(data)
 
     async def get_quote(self, query: str):
-        queryVector = model_service.encode(query)
+        queryVector = self.convert(query)
         response = await ElasticsearchClient.get_quote(queryVector)
         return response
 

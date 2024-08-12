@@ -17,7 +17,6 @@ export const POST = async (req: NextRequest) => {
     try {
         const session = await getSession();
         const data = await req.json() as QuoteRequest[];
-        console.log(data)
 
         if (data.length === 0) {
             return new NextResponse(JSON.stringify({ success: false, error: "Missing required fields" }), {
@@ -25,9 +24,11 @@ export const POST = async (req: NextRequest) => {
             });
         }
 
+        let quoteData: any[] = [];
+
         await prisma.$transaction(async (tx) => {
             for (const quote of data) {
-                await tx.quotes.create({
+                const createdQuote = await tx.quotes.create({
                     data: {
                         movie: quote.movie,
                         quote: quote.quote,
@@ -37,20 +38,23 @@ export const POST = async (req: NextRequest) => {
                         userId: session?.user?.id,
                     },
                 });
+
+                quoteData.push({
+                    quote_id: createdQuote.id,
+                    quote: createdQuote.quote,
+                });
             }
         });
 
-        await axios.post(QUOTE_API_URL, data);
+        await axios.post(QUOTE_API_URL, quoteData);
         return new NextResponse(JSON.stringify({ success: true }), { status: 201 });
     } catch (error: any) {
         console.error("Failed to post quote", error.message);
-
         return new NextResponse(JSON.stringify({ success: false, error: "Internal Server Error" }), {
             status: 500,
         });
     }
 };
-
 
 export const GET = async (req: NextRequest) => {
     const quotes = await prisma.quotes.findMany();

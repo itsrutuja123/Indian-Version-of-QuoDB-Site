@@ -1,37 +1,34 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
-import throttle from "lodash.throttle";
-import useSWR from 'swr'
-import { fetcher } from "../../libs/utils";
+import { useSearchParams } from "next/navigation";
+import axios from "axios";
 
-export default function QuoteCard({ query }: { query: string }) {
+export default function QuoteCard() {
+  const params = useSearchParams()
+  const quote = params.get("query")
   const [quotes, setQuotes] = useState<any>([]);
   const [loading, setLoading] = useState(false)
 
-  const fetchQuotes = async (searchQuery: string) => {
+  useEffect(() => {
+    fetchQuotes();
+  }, [params, quote]);
+
+  const fetchQuotes = async () => {
     setLoading(true);
-    const data = await fetcher(`/api/quote/${searchQuery}`);
-    setQuotes(data);
+    const req = await axios.post("http://localhost:3000/api/search", { quote: quote });
+    setQuotes(req.data.data);
     setLoading(false);
   };
 
-  const throttledFetchQuotes = useCallback(throttle(fetchQuotes, 2000), []);
-
-  useEffect(() => {
-    if (query.length > 0) {
-      throttledFetchQuotes(query);
-    }
-  }, [query, throttledFetchQuotes]);
-
-  if (query.length === 0) return null;
+  if (quote?.length === 0) return null;
 
   return (
     <div className="flex flex-col gap-4 lg:p-4 p-2 rounded-lg m-2 w-3/5">
       <div className="lg:text-2xl md:text-xl text-lg lg:p-3 p-1 font-black text-gray-700">
-        Top Results for {query}
+        Top Results for {quote}
       </div>
-      {loading}
+      {loading && <div>Loading...</div>}
       {quotes.map((quote: any) => (
         <div
           key={quote.id}
